@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Input Comparison</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Input Comparison</h1>
+  <button onclick="showFirstInput()">Show 1st Input</button>
+  <button onclick="showSecondInput()">Show 2nd Input</button>
+  
+  <div id="comparisonResult"></div>
+
+  <script>
+    function showFirstInput() {
+      var input1 = prompt("Enter the first input:");
+      if (input1 !== null && input1 !== "") {
+        document.getElementById('input1').value = parseFloat(input1);
+        compareInputs();
+      } else {
+        alert("Please enter a valid first input!");
+      }
+    }
+
+    function showSecondInput() {
+      var input2 = prompt("Enter the second input:");
+      if (input2 !== null && input2 !== "") {
+        document.getElementById('input2').value = parseFloat(input2);
+        compareInputs();
+      } else {
+        alert("Please enter a valid second input!");
+      }
+    }
+
+    function compareInputs() {
+      var firstInput = parseFloat(document.getElementById('input1').value);
+      var secondInput = parseFloat(document.getElementById('input2').value);
+      var comparisonResultDiv = document.getElementById('comparisonResult');
+
+      if (!isNaN(firstInput) && !isNaN(secondInput)) {
+        if (firstInput > secondInput) {
+          document.body.style.backgroundColor = 'lightblue';
+          comparisonResultDiv.textContent = 'First Input > Second Input';
+          console.log(firstInput + ' > ' + secondInput);
+        } else if (secondInput > firstInput) {
+          document.body.style.backgroundColor = 'orange';
+          comparisonResultDiv.textContent = 'Second Input > First Input';
+          console.log(secondInput + ' > ' + firstInput);
+        } else {
+          document.body.style.backgroundColor = 'lightyellow';
+          comparisonResultDiv.textContent = 'Second Input == First Input';
+          console.log(secondInput + ' == ' + firstInput);
+        }
+      } else {
+        alert("Please enter valid numbers for both inputs!");
+      }
+    }
+  </script>
+
+  <div id="firstInputPopup" class="popup">
+    <input type="number" id="input1">
+    <button onclick="compareInputs()">Submit</button>
+  </div>
+
+  <div id="secondInputPopup" class="popup">
+    <input type="number" id="input2">
+    <button onclick="compareInputs()">Submit</button>
+  </div>
+</body>
+</html>
